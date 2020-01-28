@@ -1,8 +1,24 @@
 import gym
+import numpy as np
+
 env = gym.make('CartPole-v0')
-env.reset()
-for _ in range(1000):
+
+done = False
+cnt = 0
+observation = env.reset()
+print('observation 0 : ', observation)
+
+
+while not done:
     env.render()
-    action = env.action_space
-    env.step(env.action_space.sample()) # take a random action
+    cnt += 1
+
+    action = env.action_space.sample()
+
+    observation, reward, done, _ = env.step(action)
+
+    if done:
+        break
+
 env.close()
+print('game lasted : ', cnt, 'moves')
